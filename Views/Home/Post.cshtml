@@ -1,0 +1,110 @@
+﻿@model Post
+
+@{
+
+
+}
+@{
+    var image_path = $"/Image/{Model.Image}";
+}
+<!-- Page Header -->
+@if (!String.IsNullOrEmpty(Model.Image))
+{
+    <header class="masthead" style="background-image: url('@image_path')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>@Model.Title</h1>
+                        <h2 class="subheading">@Model.SubTitle</h2>
+                        <span class="meta">
+                            Posted by
+                            <a href="#">@Model.Author</a>
+                            @Model.Create
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+}
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                @*<h1>@Model.Title</h1>
+
+                            <img src="@image_path" />
+        }*@
+                <div>
+                    @Html.Raw(Model.Body)
+                </div>
+
+                <div class="card card-comments mt-5 mb-3 wow fadeIn">
+                    <div class="card-header font-weight-bold">
+                        @if (Model.MainComments.Count != 0 && Model.MainComments.Count > 1)
+                        {
+                            <h4 class="text-secondary">Comments(@Model.MainComments.Count())</h4>
+                        }
+
+                        @if (Model.MainComments.Count == 1)
+                        {
+                            <h4 class="text-secondary">Comment(1)</h4>
+                        }
+                    </div>
+                    <div class="card-body">
+                        @foreach (var c in Model.MainComments)
+                        {
+                            <div class="media d-block d-md-flex mt-4">
+
+                                <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                    <h5 class="mt-0 font-weight-bold text-primary">
+                                        @c.Name<br />
+                                        
+                                    </h5>
+                                
+                                    <h6 class="font-weight-light font-italic text-success">
+                                        @c.Email <br />
+                                        <i class="fa fa-clock-o"></i>
+                                        @c.Created
+                                    </h6>
+
+                                    @c.Message
+
+                                </div><hr />
+                            </div>
+                        }
+
+
+
+                    </div>
+                </div>
+                @{
+                    await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0 });
+                }
+            </div>
+    </div>
+        </div>
+    
+
+</article>
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+<!-- END comment-list -->
+<!--Comments-->
+
+<!--/.Comments-->
+<!--Reply-->
+<!--/.Reply-->

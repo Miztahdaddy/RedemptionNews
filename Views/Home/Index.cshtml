@@ -1,0 +1,61 @@
+﻿@model IndexViewModel
+
+<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Redemption News</h1>
+                    <span class="subheading">Home for Gospel News and Contents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            @foreach (var post in Model.Posts)
+            {
+                <div class="post-preview">
+                    <a asp-action="post" asp-controller="home" asp-route-id="@post.Id">
+                        <h2 class="post-title">
+                            @post.Title
+                        </h2>
+                        <h3 class="post-subtitle">
+                                @post.SubTitle
+                            </h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#">@post.Author</a>
+                        on @post.Create
+                    </p>
+                </div>
+                <hr>
+            }
+
+        <div>
+            @if (Model.PageNumber > 1)
+            {
+                <a class="btn btn-primary" asp-action="index" asp-controller="home" asp-route-pageNumber="@(Model.PageNumber - 1)">Previous Page</a>
+            }
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                
+                <a class="btn btn-primary" asp-action="index" asp-controller="home" asp-route-pageNumber="@i">@i</a>
+            }
+            @if (Model.NextPage)
+            {
+                <a class="btn btn-primary ml-2" asp-action="index" asp-controller="home" asp-route-pageNumber="@(Model.PageNumber + 1)">Next Page</a>
+            }
+        </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+

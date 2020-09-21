@@ -1,0 +1,41 @@
+﻿@model CommentViewModel
+
+@{
+
+}
+
+
+
+<div class="card mb-3 wow fadeIn">
+    <div class="card-header font-weight-bold">Leave a reply</div>
+    <div class="card-body">
+
+        <!-- Default form reply -->
+        <form method="post" asp-action="comment" asp-controller="home">
+            <input type="hidden" asp-for="PostId" />
+            <input type="hidden" asp-for="MainCommentId" />
+
+            <!-- Comment -->
+            <div class="form-group">
+                <label for="Your comment">Your comment</label>
+                <textarea class="form-control" asp-for="Message" rows="5"></textarea>
+            </div>
+
+            <!-- Name -->
+            <label for="Name">Your name</label>
+            <input type="text" asp-for="Name" class="form-control">
+
+            <br>
+
+            <!-- Email -->
+            <label for="Email">Your e-mail</label>
+            <input type="email" asp-for="Email" class="form-control">
+
+
+            <div class="text-center mt-4">
+                <button class="btn btn-info btn-md" type="submit">Post</button>
+            </div>
+        </form>
+        <!-- Default form reply -->
+    </div>
+</div>
